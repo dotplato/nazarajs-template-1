@@ -7,6 +7,8 @@ export default function  Store() {
 Products List here
       add a card for each product and then this button
       <Button> Add to Cart</Button>
+            <Button> BUY NOW</Button>
+
     </div>
   )
 }
