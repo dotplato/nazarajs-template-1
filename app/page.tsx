@@ -1,72 +1,81 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import TopNavbar from '@/components/TopNavbar';
-import MainNavbar from '@/components/MainNavbar';
+import { HomeHero } from "@/components/HomeHero";
+import { ProductCarousel } from "@/components/ProductCarousel";
+import { CategoryShowcase } from "@/components/CategoryShowcase";
+import { ProductCardProps } from "@/components/ProductCard";
 
-const heroImages = ['/h1.webp', '/t-shirt.webp', '/h3.jpg'];
+const saleProducts: ProductCardProps[] = [
+  {
+    id: "1",
+    name: "Men's Premium Hoodie",
+    price: 2500,
+    originalPrice: 5000,
+    image: "/hoodie.avif",
+    category: "Hoodies",
+    badge: { text: "SALE", variant: "destructive" },
+    href: "/product/1",
+  },
+  {
+    id: "2",
+    name: "Leather Belt - Brown",
+    price: 1200,
+    originalPrice: 2000,
+    image: "/leather-belt.webp",
+    category: "Accessories",
+    badge: { text: "SALE", variant: "destructive" },
+    href: "/product/2",
+  },
+  {
+    id: "3",
+    name: "Men's Casual Sneakers",
+    price: 3500,
+    originalPrice: 6000,
+    image: "/sneakers.webp",
+    category: "Shoes",
+    badge: { text: "SALE", variant: "destructive" },
+    href: "/product/3",
+  },
+  {
+    id: "4",
+    name: "Classic Baseball Cap",
+    price: 800,
+    originalPrice: 1500,
+    image: "/cap.webp",
+    category: "Accessories",
+    badge: { text: "SALE", variant: "destructive" },
+    href: "/product/4",
+  },
+  {
+    id: "5",
+    name: "Men's Denim Jacket",
+    price: 4500,
+    originalPrice: 8000,
+    image: "/t-shirt.webp",
+    category: "Jackets",
+    badge: { text: "SALE", variant: "destructive" },
+    href: "/product/5",
+  },
+];
 
 export default function Home() {
-
-
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-
   return (
-    
-    <main className="min-h-screen">
-      <TopNavbar />
-      <MainNavbar />
-      <section className="relative min-h-screen w-screen flex  items-center justify-center text-white bg-blue-950 overflow-hidden">
-<div className="relative w-200 h-200">
-        <div className="absolute inset-0 z-0">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={heroImages[index]}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="absolute inset-0"
-            >
-              
-                <Image
-                  src={heroImages[index]}
-                  alt={`Slide ${index}`}
-                  fill
-                  className="object-cover w-140 h-200"
-                  priority
-                  quality={100}
-                />
-             
-            </motion.div>
-          </AnimatePresence>
-        </div>
- </div>
-        
-        <div className="relative z-10 text-center px-6">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Discover Modern Streetwear
-          </h1>
-          <p className="text-lg md:text-xl mb-6">
-            Premium T-Shirts. Designed for comfort. Built for confidence.
-          </p>
-          <Button asChild>
-            <Link href="/shop">Shop Now</Link>
-          </Button>
-        </div>
+    <main className="min-h-screen overflow-x-hidden">
+      {/* Unique full-screen hero — only on homepage */}
+      <HomeHero />
 
+      {/* Category Cards Section */}
+      <section className="w-full max-w-7xl mx-auto px-4 pt-4 pb-0">
+        <CategoryShowcase />
+      </section>
+
+      {/* Sale Products Carousel */}
+      <section className="w-full max-w-7xl mx-auto px-4 pt-4 pb-8">
+        <ProductCarousel
+          subtitle="RECOMMENDED"
+          title="Sale Products"
+          products={saleProducts}
+        />
       </section>
     </main>
   );
