@@ -70,13 +70,15 @@ export function HomeHero() {
       {/* Slide indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {heroImages.map((_, i) => (
-          <button
+          <Button
             key={i}
+            variant="ghost"
+            size="icon"
             onClick={() => setIndex(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
+            aria-label={`Go to slide ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all duration-300 p-0 hover:bg-transparent ${
               i === index ? "w-8 bg-white" : "w-2 bg-white/40"
             }`}
-            aria-label={`Go to slide ${i + 1}`}
           />
         ))}
       </div>

@@ -6,7 +6,9 @@ import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { ProductCard, ProductCardProps } from "@/components/ProductCard";
+import { AddToCartButton } from "@/components/AddToCartButton";
 
 // ─── Product Data ────────────────────────────────────────────────────────────
 const allProducts: Record<
@@ -294,7 +296,6 @@ export default function ProductPage({
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
 
   if (!product) {
     return (
@@ -312,11 +313,6 @@ export default function ProductPage({
   const discount = Math.round(
     ((product.originalPrice - product.price) / product.originalPrice) * 100,
   );
-
-  const handleAddToCart = () => {
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 2000);
-  };
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-white">
@@ -403,32 +399,36 @@ export default function ProductPage({
               {/* Qty + Add to Cart */}
               <div className="flex items-center gap-3">
                 <div className="flex items-center border border-gray-300 rounded-full overflow-hidden">
-                  <button
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="w-10 h-10 rounded-full"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-gray-100 transition-colors"
                   >
                     −
-                  </button>
+                  </Button>
                   <span className="w-10 text-center font-semibold text-lg">
                     {quantity}
                   </span>
-                  <button
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="w-10 h-10 rounded-full"
                     onClick={() => setQuantity((q) => q + 1)}
-                    className="w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-gray-100 transition-colors"
                   >
                     +
-                  </button>
+                  </Button>
                 </div>
-                <Button
-                  onClick={handleAddToCart}
-                  className={`flex-1 h-10 rounded-full font-semibold text-sm transition-all duration-300 ${
-                    addedToCart
-                      ? "bg-green-600 hover:bg-green-700"
-                      : "bg-black hover:bg-gray-800"
-                  }`}
-                >
-                  {addedToCart ? "✓ Added to Cart!" : "🛒 Add to Cart"}
-                </Button>
+                <AddToCartButton
+                  product={{
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.images[0],
+                    category: product.category,
+                  }}
+                  className="flex-1 h-10"
+                />
               </div>
 
               {/* Buy Now */}

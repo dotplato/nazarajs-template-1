@@ -25,13 +25,17 @@ export function ProductCarousel({
   return (
     <div className="w-full">
       {(title || subtitle) && (
-        <div className="text-center mb-8">
-          {subtitle && (
-            <p className="text-sm text-gray-500 uppercase tracking-wider mb-2">
-              {subtitle}
-            </p>
-          )}
-          {title && <h2 className="text-3xl md:text-4xl font-bold">{title}</h2>}
+        <div className="flex items-end justify-between mb-6">
+          <div>
+            {subtitle && (
+              <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">
+                {subtitle}
+              </p>
+            )}
+            {title && (
+              <h2 className="text-2xl md:text-3xl font-bold">{title}</h2>
+            )}
+          </div>
         </div>
       )}
 
@@ -46,7 +50,7 @@ export function ProductCarousel({
           {products.map((product, index) => (
             <CarouselItem
               key={index}
-              className="pl-4 basis-full md:basis-1/2 lg:basis-1/2 xl:basis-1/3"
+              className="pl-4 basis-full sm:basis-[80%] md:basis-1/2 xl:basis-1/3"
             >
               <ProductCard {...product} orientation="horizontal" />
             </CarouselItem>

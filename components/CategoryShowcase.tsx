@@ -50,7 +50,7 @@ export function CategoryShowcase() {
                   <p className="text-sm font-medium text-gray-600 mb-1">
                     {category.subtitle}
                   </p>
-                  <h3 className="text-2xl font-bold mb-4 uppercase">
+                  <h3 className="text-md font-bold mb-4 uppercase">
                     {category.title}
                   </h3>
                   <Button

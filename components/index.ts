@@ -13,6 +13,11 @@ export { HomeHero } from "./HomeHero";
 
 export { CategoryShowcase } from "./CategoryShowcase";
 
+export { HomeProductCard } from "./HomeProductCard";
+
+export { SectionHeader } from "./SectionHeader";
+export type { SectionHeaderProps } from "./SectionHeader";
+
 // ─── Section-level reusable ───────────────────────────────
 export { PageHeader } from "./PageHeader";
 export type { PageHeaderProps } from "./PageHeader";
@@ -28,3 +33,11 @@ export type { ProductCarouselProps } from "./ProductCarousel";
 
 export { EmptyState } from "./EmptyState";
 export type { EmptyStateProps } from "./EmptyState";
+
+// ─── Cart ─────────────────────────────────────────────────
+export { AddToCartButton } from "./AddToCartButton";
+export { CartDrawer } from "./CartDrawer";
+
+// ─── Store ────────────────────────────────────────────────
+export { StoreFilters } from "./StoreFilters";
+export type { FilterState } from "./StoreFilters";

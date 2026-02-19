@@ -43,41 +43,9 @@ export function ProductCard({
   if (orientation === "horizontal") {
     return (
       <Card className="group overflow-hidden border-gray-200 hover:shadow-lg transition-all duration-300 h-full">
-        <div className="flex flex-row h-full">
-          {/* Left side - Content */}
-          <div className="flex-1 flex flex-col p-6">
-            <div className="flex-1">
-              <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">
-                {category}
-              </p>
-              <Link href={href}>
-                <h3 className="font-semibold text-xl mb-3 hover:underline line-clamp-2">
-                  {name}
-                </h3>
-              </Link>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl font-bold">
-                  Rs. {price.toLocaleString()}
-                </span>
-                {originalPrice && (
-                  <span className="text-sm text-gray-500 line-through">
-                    Rs. {originalPrice.toLocaleString()}
-                  </span>
-                )}
-              </div>
-              {discount > 0 && (
-                <Badge variant="destructive" className="mb-4">
-                  -{discount}% OFF
-                </Badge>
-              )}
-            </div>
-            <Button asChild className="w-full mt-auto">
-              <Link href={href}>View Details</Link>
-            </Button>
-          </div>
-
-          {/* Right side - Image */}
-          <div className="relative w-1/2 max-w-[240px] flex-shrink-0">
+        <div className="flex flex-col sm:flex-row h-full">
+          {/* Top on mobile / Right on sm+ — Image */}
+          <div className="relative w-full sm:w-2/5 sm:max-w-[200px] flex-shrink-0 aspect-[4/3] sm:aspect-auto">
             <Link
               href={href}
               className="relative block h-full overflow-hidden bg-gray-100"
@@ -91,12 +59,44 @@ export function ProductCard({
               {badge && (
                 <Badge
                   variant={badge.variant || "default"}
-                  className="absolute top-3 right-3 z-10"
+                  className="absolute top-3 left-3 z-10"
                 >
                   {badge.text}
                 </Badge>
               )}
             </Link>
+          </div>
+
+          {/* Bottom on mobile / Left on sm+ — Content */}
+          <div className="flex-1 flex flex-col p-4">
+            <div className="flex-1">
+              <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">
+                {category}
+              </p>
+              <Link href={href}>
+                <h3 className="font-semibold text-sm mb-2 hover:underline line-clamp-2">
+                  {name}
+                </h3>
+              </Link>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-sm font-bold">
+                  Rs. {price.toLocaleString()}
+                </span>
+                {originalPrice && (
+                  <span className="text-xs text-gray-400 line-through">
+                    Rs. {originalPrice.toLocaleString()}
+                  </span>
+                )}
+              </div>
+              {discount > 0 && (
+                <Badge variant="destructive" className="mb-2 text-xs">
+                  -{discount}% OFF
+                </Badge>
+              )}
+            </div>
+            <Button asChild className="w-full mt-auto" size="sm">
+              <Link href={href}>View Details</Link>
+            </Button>
           </div>
         </div>
       </Card>

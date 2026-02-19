@@ -8,7 +8,7 @@ export default function TopNavbar() {
         FREE SHIPPING on orders above Rs 2000 &nbsp;|&nbsp; Pay Online For A
         Hassle-Free Delivery
       </span>
-      <span className="sm:hidden">FREE SHIPPING on orders above Rs 2000</span>
+      <span className="sm:hidden">FREE SHIPPING on orders above Rs 3000</span>
     </div>
   );
 }
