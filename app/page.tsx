@@ -1,72 +1,203 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import TopNavbar from '@/components/TopNavbar';
-import MainNavbar from '@/components/MainNavbar';
+import Link from "next/link";
+import { HomeHero } from "@/components/HomeHero";
+import { ProductCarousel } from "@/components/ProductCarousel";
+import { CategoryShowcase } from "@/components/CategoryShowcase";
+import { HomeProductCard } from "@/components/HomeProductCard";
+import { SectionHeader } from "@/components/SectionHeader";
+import { ProductCardProps } from "@/components/ProductCard";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
-const heroImages = ['/h1.webp', '/t-shirt.webp', '/h3.jpg'];
+// ─── Product Data ─────────────────────────────────────────────────────────────
+const saleProducts: ProductCardProps[] = [
+  {
+    id: "1",
+    name: "Men's Premium Hoodie",
+    price: 2500,
+    originalPrice: 5000,
+    image: "/hoodie.avif",
+    category: "Hoodies",
+    badge: { text: "50% OFF", variant: "destructive" },
+    href: "/product/1",
+  },
+  {
+    id: "2",
+    name: "Leather Belt - Brown",
+    price: 1200,
+    originalPrice: 2000,
+    image: "/leather-belt.webp",
+    category: "Accessories",
+    badge: { text: "40% OFF", variant: "destructive" },
+    href: "/product/2",
+  },
+  {
+    id: "3",
+    name: "Men's Casual Sneakers",
+    price: 3500,
+    originalPrice: 6000,
+    image: "/sneakers.webp",
+    category: "Shoes",
+    badge: { text: "42% OFF", variant: "destructive" },
+    href: "/product/3",
+  },
+  {
+    id: "4",
+    name: "Classic Baseball Cap",
+    price: 800,
+    originalPrice: 1500,
+    image: "/cap.webp",
+    category: "Accessories",
+    badge: { text: "47% OFF", variant: "destructive" },
+    href: "/product/4",
+  },
+];
 
+const newArrivals: ProductCardProps[] = [
+  {
+    id: "5",
+    name: "Men's Denim Jacket",
+    price: 4500,
+    originalPrice: 8000,
+    image: "/t-shirt.webp",
+    category: "Jackets",
+    badge: { text: "NEW", variant: "secondary" },
+    href: "/product/5",
+  },
+  {
+    id: "6",
+    name: "Men's Slim Fit T-Shirt",
+    price: 700,
+    originalPrice: 1400,
+    image: "/t-shirt.webp",
+    category: "T-Shirts",
+    badge: { text: "NEW", variant: "secondary" },
+    href: "/product/6",
+  },
+  {
+    id: "7",
+    name: "Men's Chino Pants",
+    price: 2200,
+    originalPrice: 3500,
+    image: "/t-shirt.webp",
+    category: "Pants",
+    badge: { text: "NEW", variant: "secondary" },
+    href: "/product/7",
+  },
+  {
+    id: "8",
+    name: "Men's Formal Shirt",
+    price: 1800,
+    originalPrice: 3000,
+    image: "/t-shirt.webp",
+    category: "Shirts",
+    badge: { text: "NEW", variant: "secondary" },
+    href: "/product/8",
+  },
+];
+
+const storeHighlights: ProductCardProps[] = [
+  {
+    id: "9",
+    name: "Men's Oxford Casual Shirt",
+    price: 1600,
+    originalPrice: 2800,
+    image: "/t-shirt.webp",
+    category: "Shirts",
+    href: "/product/8",
+  },
+  {
+    id: "10",
+    name: "Men's Cargo Shorts",
+    price: 1100,
+    originalPrice: 2000,
+    image: "/t-shirt.webp",
+    category: "Shorts",
+    href: "/product/7",
+  },
+  {
+    id: "11",
+    name: "Men's Zip-Up Hoodie",
+    price: 2800,
+    originalPrice: 4500,
+    image: "/hoodie.avif",
+    category: "Hoodies",
+    href: "/product/1",
+  },
+  {
+    id: "12",
+    name: "Men's Leather Loafers",
+    price: 4200,
+    originalPrice: 7000,
+    image: "/sneakers.webp",
+    category: "Shoes",
+    href: "/product/3",
+  },
+];
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function Home() {
-
-
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-
   return (
-    
-    <main className="min-h-screen">
-      <TopNavbar />
-      <MainNavbar />
-      <section className="relative min-h-screen w-screen flex  items-center justify-center text-white bg-blue-950 overflow-hidden">
-<div className="relative w-200 h-200">
-        <div className="absolute inset-0 z-0">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={heroImages[index]}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="absolute inset-0"
-            >
-              
-                <Image
-                  src={heroImages[index]}
-                  alt={`Slide ${index}`}
-                  fill
-                  className="object-cover w-140 h-200"
-                  priority
-                  quality={100}
-                />
-             
-            </motion.div>
-          </AnimatePresence>
-        </div>
- </div>
-        
-        <div className="relative z-10 text-center px-6">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Discover Modern Streetwear
-          </h1>
-          <p className="text-lg md:text-xl mb-6">
-            Premium T-Shirts. Designed for comfort. Built for confidence.
-          </p>
-          <Button asChild>
-            <Link href="/shop">Shop Now</Link>
+    <main className="min-h-screen overflow-x-hidden">
+      {/* Hero */}
+      <HomeHero />
+
+      {/* Category Showcase */}
+      <section className="w-full max-w-7xl mx-auto px-4 pt-4 pb-0">
+        <CategoryShowcase />
+      </section>
+
+      <Separator className="max-w-7xl mx-auto px-4 my-8" />
+
+      {/* Sale Products — carousel preview */}
+      <section className="w-full max-w-7xl mx-auto px-4 pb-4">
+        <ProductCarousel
+          subtitle="LIMITED TIME"
+          title="On Sale Now"
+          products={saleProducts}
+        />
+        <div className="flex justify-center mt-6">
+          <Button
+            asChild
+            className="rounded-full bg-black text-white hover:bg-gray-800 px-8 font-semibold"
+          >
+            <Link href="/sale">Shop All Sale Items →</Link>
           </Button>
         </div>
+      </section>
 
+      <Separator className="max-w-7xl mx-auto px-4 my-8" />
+
+      {/* New Arrivals — grid preview */}
+      <section className="w-full max-w-7xl mx-auto px-4 py-4">
+        <SectionHeader
+          subtitle="Just In"
+          title="New Arrivals"
+          href="/new-arrivals"
+        />
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {newArrivals.map((p) => (
+            <HomeProductCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
+
+      <Separator className="max-w-7xl mx-auto px-4 my-8" />
+
+      {/* Store Highlights — grid preview */}
+      <section className="w-full max-w-7xl mx-auto px-4 py-4 pb-16">
+        <SectionHeader
+          subtitle="Men's Fashion"
+          title="Browse The Store"
+          href="/store"
+          linkLabel="Visit Store"
+        />
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          {storeHighlights.map((p) => (
+            <HomeProductCard key={p.id} product={p} />
+          ))}
+        </div>
       </section>
     </main>
   );
